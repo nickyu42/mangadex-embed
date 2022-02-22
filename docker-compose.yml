@@ -7,9 +7,9 @@ services:
     init: true
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.holotagger.rule=Host(`mangadex.org.njkyu.com`)"
-      - "traefik.http.routers.holotagger.tls=true"
-      - "traefik.http.routers.holotagger.tls.certresolver=le"
+      - "traefik.http.routers.md-embed.rule=Host(`mangadex.org.njkyu.com`)"
+      - "traefik.http.routers.md-embed.tls=true"
+      - "traefik.http.routers.md-embed.tls.certresolver=le"
     environment:
       - GIN_MODE=release
       - PORT=80

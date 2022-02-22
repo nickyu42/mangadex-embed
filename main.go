@@ -103,8 +103,8 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 
-	r.GET("/:md-id", createEmbed)
-	r.GET("/:md-id/:manga-name", createEmbed)
+	r.GET("/title/:md-id", createEmbed)
+	r.GET("/title/:md-id/:manga-name", createEmbed)
 
 	r.Run()
 }
@@ -122,7 +122,8 @@ func parseMangaResponse(val *fastjson.Value, mangaId string) gin.H {
 	var language string
 	titleObj.Visit(func(key []byte, v *fastjson.Value) {
 		language = string(key)
-		title = string(v.MarshalTo(nil))
+		t, _ := v.StringBytes()
+		title = string(t)
 	})
 
 	var desc string
@@ -133,7 +134,9 @@ func parseMangaResponse(val *fastjson.Value, mangaId string) gin.H {
 		}
 
 		lang := string(key)
-		desc = string(v.MarshalTo(nil))
+
+		d, _ := v.StringBytes()
+		desc = string(d)
 
 		if lang == language {
 			found = true
