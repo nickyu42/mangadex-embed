@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    container_name: md-embed
+    init: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.holotagger.rule=Host(`mangadex.org.njkyu.com`)"
+      - "traefik.http.routers.holotagger.tls=true"
+      - "traefik.http.routers.holotagger.tls.certresolver=le"
+    environment:
+      - GIN_MODE=release
+      - PORT=80
